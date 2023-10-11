@@ -1,6 +1,6 @@
 # Temperature Alert System
 
-The Temperature Alert System is a versatile tool that makes real-time temperature monitoring and notifications easy. Whether you're an outdoor enthusiast, a traveler, or just someone who likes to stay informed about the weather, this project is designed to meet your needs. Here's what you can expect from the Temperature Alert System:
+The Temperature Alert System is a versatile tool that makes real-time temperature monitoring and notifications easy. Whether you're an outdoor enthusiast, a traveler, or just someone who likes to stay informed about the weather, this project is designed to meet your needs. It also features a fully functional GUI to make it easier for the users to interact with the project. Here's what you can expect from the Temperature Alert System:
 
 ## Key Features
 
@@ -9,6 +9,8 @@ The Temperature Alert System is a versatile tool that makes real-time temperatur
 - **Customizable Temperature Thresholds**: You have the flexibility to set both minimum and maximum temperature thresholds, allowing you to receive alerts tailored to your preferences.
 
 - **Instant Notifications**: Receive immediate alerts and notifications when the current temperature in your chosen location falls below or exceeds your predefined thresholds.
+
+- **GUI for user input**: Users can enter data through a light GUI window developed in Tkinter library of python.
 
 
 
@@ -25,9 +27,9 @@ We recommend using Python 3.8 or higher.
 
 
 ### Cloning the Project
-Run the command on your terminal git clone <repository_url>
+Run the command on your terminal 
+```bash git clone https://github.com/mehulambastha/hackai-techfest-230588/```
 
-Replace <repository_url> with the actual URL of the project's Git repository.
 
 #### API Keys
 
@@ -63,10 +65,14 @@ You'll also need the server address for uAgents. Detailed information on obtaini
 Once you have these API keys and your server address, create a `.env` file within the `src` directory with the following content:
 
 ```bash
- WEATHER_API_KEY="{YOUR OPEN WEATHER API KEY}"
- LOCATION_API_KEY="{YOUR API NINJAS GEOCODING API KEY}"
+ OPENWEATHERAPI_KEY="{YOUR OPEN WEATHER API KEY}"
+ APININJA_KEY="{YOUR API NINJAS GEOCODING API KEY}"
  SERVER_ADDRESS="{YOUR SERVER ADDRESS}"
 ```
+
+Note: when putting the APININJA_KEY, enclose the key in quotation marks ("). This is so that the key parses correctly, as it contains characters like equal signs (=). 
+Note: the GUI Window is made using tkinter library, it is must to have it. Most [ython installations have tkinter pre-installed, but in case your system does not have it, install tkinter using-
+```bash pip install tk```
 
 ### Installation and Setup
 
@@ -87,7 +93,7 @@ To launch the project and its agents, navigate to the `src` directory and execut
 
 ```bash
 cd src
-poetry run python main.py
+python3 main.py
 ```
 
 Congratulations! You are now ready to start receiving temperature alerts and keeping a watchful eye on the weather with the Temperature Alert System. Stay informed and stay comfortable!
