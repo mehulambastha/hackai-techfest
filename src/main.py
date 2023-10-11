@@ -15,6 +15,7 @@ from agents.user import User
 # importing the Weather Monitor agent (server)
 from agents.monitoringServer import WeatherMonitor
 
+# initialised the bureau
 bureau = Bureau()
 
 # Adding both the agents to bureau

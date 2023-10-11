@@ -122,12 +122,39 @@ class InfoGeoLocation:
 # Keeping it outside the on_interval decorator because there is no need to fetch it every five seconds. The server address remains same during the whole lifetime of one instance 
 SERVER_ADDRESS=os.getenv("SERVER_ADDRESS")
 
-# interval send
+# On interval decorator
+'''
+    Function: send_data_to_server
+    Arguments: context
+    Returns: None
+    
+    Usage:
+        - extracts latitude and longitude by using extract_latlong method of the InfoGeoLocation class
+        - send the complete user data along with latitude and longitude (in a single coordinates object) to the server.
+        - the structure of the coordinates object is
+            {
+                latitude: float
+                longitude: float
+            }
+'''
 @User.on_interval(period=5)
 async def send_data_to_server(ctx: Context):
     geoLocation = InfoGeoLocation.extract_latLong()
+    
+    # Sending the data to server according to the MessageToServer protocol
     await ctx.send(SERVER_ADDRESS, MessageToServer(city=user_data["city"], state=user_data["state"], country=user_data["country"], min_temp=user_data["min_temp"], max_temp=user_data["max_temp"], geoLocation=user_data["coordinates"]))
 
+
+# Decorator to define the user agent's response on reciveing a message fomr the server
+'''
+    Function: weather_monitor_response
+    Arguments: MonitorResponse data model
+    Returns: None
+    
+    functionality:
+        - logs the response from the server
+        - the response contains two things: current_temp <type: float> and out_of_range <type: bool>
+'''
 @User.on_message(model=MonitorResponse)
 async def weather_monitor_response(ctx: Context, sender: str, msg: MonitorResponse):
     ctx.logger.info(f"Response from server address {sender}:\n Current Temp: {msg.current_temp}\nOut of range? {msg.out_of_range}")
