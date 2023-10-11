@@ -3,7 +3,10 @@ from uagents.contrib.protocols.protocol_query import proto_query
 from uagents.setup import fund_agent_if_low
 import requests
 import json
+import os
+from dotenv import load_dotenv
 from plyer import notification
+load_dotenv()
 
 from messages.messageModels import MonitorResponse, MessageToServer
 # from protocols.models import query_proto, LiveCurrencyModel
@@ -24,7 +27,8 @@ class TemperatureMonitoring:
     def fetch_live_temp(coordinates):
         latitude = coordinates["latitude"]
         longitude = coordinates["longitude"]
-        OPENWEATHERAPI_KEY="9adbc50b053420b08313a08e6ef937cc"
+        
+        OPENWEATHERAPI_KEY=os.getenv("OPENWEATHERAPI_KEY")
         OPENWEATHERAPI_URL=f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={OPENWEATHERAPI_KEY}"
 
         temperatures_live = requests.get(OPENWEATHERAPI_URL)
@@ -40,8 +44,7 @@ class TemperatureMonitoring:
 
 @WeatherMonitor.on_event("startup")
 async def startup_weather_agent(ctx: Context):
-    with open(".env", "w") as file:
-        file.write(f"SERVER_ADDRESS={ctx.address}" )
+    os.putenv("SERVER_ADDRESS", ctx.address)
 
     ctx.logger.info(f"Weather Monitor up and running. The registered name is {ctx.name}, the address {ctx.address}")
 
