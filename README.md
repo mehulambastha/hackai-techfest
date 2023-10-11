@@ -71,8 +71,12 @@ Once you have these API keys and your server address, create a `.env` file withi
 ```
 
 Note: when putting the APININJA_KEY, enclose the key in quotation marks ("). This is so that the key parses correctly, as it contains characters like equal signs (=). 
+
 Note: the GUI Window is made using tkinter library, it is must to have it. Most [ython installations have tkinter pre-installed, but in case your system does not have it, install tkinter using-
-```bash pip install tk```
+
+```bash 
+pip install tk
+```
 
 ### Installation and Setup
 
