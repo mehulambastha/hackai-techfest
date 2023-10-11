@@ -101,3 +101,5 @@ python3 main.py
 ```
 
 Congratulations! You are now ready to start receiving temperature alerts and keeping a watchful eye on the weather with the Temperature Alert System. Stay informed and stay comfortable!
+
+NOTE: When entering country in the input field, use the abbreviation for the country, eg: in for india, gb for england.
